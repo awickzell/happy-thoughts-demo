@@ -12,6 +12,8 @@ export const PostMessage = ({ newMessage, fetchPosts }) => {
     }
   }, [newPost])
 
+
+
   // This function handles the API with method POST
   // It is called when the user submits the form below, clicking the submit button
   const handleFormSubmit = (event) => {
@@ -31,7 +33,10 @@ export const PostMessage = ({ newMessage, fetchPosts }) => {
       }
 
       // console.log('options:', options)
-      fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts", options)
+
+
+      
+      fetch(`${import.meta.env.VITE_API_URL}/thoughts`, options)
         .then((response) => response.json())
         .then((data) => {
           newMessage(data)

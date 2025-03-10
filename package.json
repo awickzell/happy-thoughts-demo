@@ -1,0 +1,27 @@
+{
+  "name": "happy-thoughts-demo",
+  "version": "1.0.0",
+  "description": "Replace this readme with your own information about your project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awickzell/happy-thoughts-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/awickzell/happy-thoughts-demo/issues"
+  },
+  "homepage": "https://github.com/awickzell/happy-thoughts-demo#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.1"
+  }
+}

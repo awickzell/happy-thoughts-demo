@@ -1,39 +1,34 @@
-import { useState } from "react"
-import { formatDistance } from "date-fns"
+import { useState } from "react";
+import { formatDistance } from "date-fns";
 
 export const SingleMessage = ({ singleMessage, fetchPosts }) => {
-  const [numLikes, setNumLikes] = useState(singleMessage.hearts) // Setting the initial state to the current number of hearts
-  const [liked, setLiked] = useState(false) // Initial state false
+  const [numLikes, setNumLikes] = useState(singleMessage.hearts); // Initial hearts state
+  const [liked, setLiked] = useState(false); // Initial liked state
 
-  // We calculate the time since the message was posted (date-fns)
   const timeSincePosted = formatDistance(
     new Date(singleMessage.createdAt),
     new Date(),
     { addSuffix: true }
-  )
+  );
 
-  // This function posts a like to the API, set the like status and updates the message list through fetchPosts
   const onLikeIncrease = () => {
     const options = {
       method: "POST",
-    }
+    };
 
-    // eslint-disable-next-line no-underscore-dangle
-    fetch(
-      `https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts/${singleMessage._id}/like`,
-      options
-    )
+    fetch(`${import.meta.env.VITE_API_URL}/thoughts/${singleMessage._id}/like`, options)
       .then((response) => response.json())
       .then(() => {
-        setNumLikes(numLikes + 1) // We post to the API the current number of likes + 1
-        setLiked(true) // We set the state liked to true
-        fetchPosts() // We call the fetchPost function in the grandparent, fetching from the API, rendering an update in messageList.
+        setNumLikes(numLikes + 1);
+        setLiked(true);
+        fetchPosts();
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="message">
-      <p key={singleMessage._id}>{singleMessage.message}</p>
+      <p key={singleMessage._id}>{singleMessage.text}</p> {/* Use "text" instead of "message" */}
       <div className="info-wrapper">
         <div className="info-like">
           <button
@@ -46,10 +41,10 @@ export const SingleMessage = ({ singleMessage, fetchPosts }) => {
               &#x2665;
             </span>
           </button>
-          <span className="num-likes">x{singleMessage.hearts}</span>
+          <span className="num-likes">x{numLikes}</span>
         </div>
         <div className="info-time">{timeSincePosted}</div>
       </div>
     </div>
-  )
-}
+  );
+};
